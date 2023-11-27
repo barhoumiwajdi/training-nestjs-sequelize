@@ -1,22 +1,33 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
+
+import { InferAttributes, InferCreationAttributes, NonAttribute } from 'sequelize';
+import { Guest } from './Guest.Entity';
+
 
 @Table
-export class User extends Model {
+export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
+    @PrimaryKey
+    @AutoIncrement
+    @Column
+    declare userId: number
 
     @Column
-    firstname: string;
+    declare firstname: string;
 
     @Column
-    lastname: string;
+
+    declare lastname: string;
 
     @Column({ unique: true })
-    email: string;
+
+    declare email: string;
 
     @Column
-    password: string;
+
+    declare password: string;
 
     @Column
-    age: number;
+    declare age: number;
 
 }
