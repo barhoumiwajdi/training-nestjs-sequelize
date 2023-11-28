@@ -1,4 +1,4 @@
-import { Injectable, Inject, UnauthorizedException, BadRequestException, HttpException, HttpStatus, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Injectable, Inject, UnauthorizedException, BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
 
 import { User } from 'src/Entity/User.entity';
 
@@ -90,6 +90,21 @@ export class UserService {
             }, HttpStatus.INTERNAL_SERVER_ERROR, {
                 cause: error
             });
+        }
+    }
+    async deleteUser(id: any) {
+        try {
+            const data = await this.userRepository.destroy({
+                where: { id: id }
+            })
+            return "user deleted succefully "
+        } catch (error) {
+            throw new HttpException({
+                status: HttpStatus.INTERNAL_SERVER_ERROR,
+                error: " this internal Serveur "
+            }, HttpStatus.INTERNAL_SERVER_ERROR, {
+                cause: error
+            })
         }
     }
 
